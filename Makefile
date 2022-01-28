@@ -6,7 +6,7 @@
 #    By: 0xNino <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 13:38:51 by 0xNino            #+#    #+#              #
-#    Updated: 2022/01/24 14:23:40 by 0xNino           ###   ########.fr        #
+#    Updated: 2022/01/28 11:57:13 by 0xNino           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,15 +29,13 @@ SRCS	= src/pipex.c
 
 OBJS	= ${SRCS:.c=.o}
 
-all: $(LIBFT) $(NAME)
+all: $(NAME)
 
-$(NAME):	$(LIBFT) $(OBJS)
-			@$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIB)
-			@echo "[$(GREEN)pipex\tcompiled$(RESET)]"
-
-$(LIBFT):
+$(NAME):	$(OBJS)
 			@$(MAKE) -sC $(LIB_DIR)
 			@echo "[$(GREEN)libft\tcompiled$(RESET)]"
+			@$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIB)
+			@echo "[$(GREEN)pipex\tcompiled$(RESET)]"
 
 clean:
 		@$(MAKE) -sC $(LIB_DIR) clean
