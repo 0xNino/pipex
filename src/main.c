@@ -6,7 +6,7 @@
 /*   By: 0xNino <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 13:49:49 by 0xNino            #+#    #+#             */
-/*   Updated: 2022/01/28 14:22:37 by 0xNino           ###   ########.fr       */
+/*   Updated: 2022/01/28 16:34:51 by 0xNino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,5 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	if (argc >= 5)
-	{
-		pipex(argc, argv, envp);
-	}
-	else
-	{
-	}
+	return (pipex(argc, argv, envp));
 }

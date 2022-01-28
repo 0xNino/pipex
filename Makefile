@@ -6,7 +6,7 @@
 #    By: 0xNino <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 13:38:51 by 0xNino            #+#    #+#              #
-#    Updated: 2022/01/28 11:57:13 by 0xNino           ###   ########.fr        #
+#    Updated: 2022/01/28 16:36:57 by 0xNino           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ CC		= cc
 CFLAGS	= -Wall -Werror -Wextra
 RM		= rm -f
 
-SRCS	= src/pipex.c
+SRCS	=	src/main.c \
+			src/pipex.c
 
 OBJS	= ${SRCS:.c=.o}
 
