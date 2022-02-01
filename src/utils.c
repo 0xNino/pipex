@@ -6,7 +6,7 @@
 /*   By: 0xNino <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 18:22:39 by 0xNino            #+#    #+#             */
-/*   Updated: 2022/02/02 00:01:20 by 0xNino           ###   ########.fr       */
+/*   Updated: 2022/02/02 00:33:17 by 0xNino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*get_path(char *cmd, char **envp)
 	{
 		tmp = ft_strjoin(path_array[i], "/");
 		path = ft_strjoin(tmp, cmd);
-		free(tmp);
+		ft_free_ptr((void **)&tmp);
 		if (!access(path, F_OK))
 			return (path);
 		i++;
