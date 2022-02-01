@@ -6,7 +6,7 @@
 /*   By: 0xNino <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 18:22:39 by 0xNino            #+#    #+#             */
-/*   Updated: 2022/02/01 19:54:39 by 0xNino           ###   ########.fr       */
+/*   Updated: 2022/02/01 23:20:28 by 0xNino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,31 @@ void	execute(char *argv, char **envp)
 {	
 	char	**cmd;
 
-	printf("start execute\n");
 	cmd = ft_split(argv, ' ');
-	get_path(cmd[0], envp);
+	if (execve(get_path(cmd[0], envp), cmd, envp) == -1)
+		error("Error\nExecve error\n");
 }
 
-void	get_path(char *cmd, char **envp)
+char	*get_path(char *cmd, char **envp)
 {
 	char	**path_array;
-//	char	*path;
+	char	*path;
 	int		i;
+	char	*tmp;
 
-	cmd = NULL;
 	i = 0;
 	while (!ft_strnstr(envp[i], "PATH", 4))
 		i++;
-	path_array = ft_split(envp[i], ':');
-	while (envp[i])
+	path_array = ft_split(envp[i] + 5, ':');
+	i = 0;
+	while (path_array[i])
 	{
-		printf("%s\n", envp[i]);
+		tmp = ft_strjoin(path_array[i], "/");
+		path = ft_strjoin(tmp, cmd);
+		free(tmp);
+		if (!access(path, F_OK))
+			return (path);
 		i++;
 	}
+	return (0);
 }
