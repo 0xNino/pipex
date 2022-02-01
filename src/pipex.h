@@ -6,7 +6,7 @@
 /*   By: 0xNino <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 13:48:20 by 0xNino            #+#    #+#             */
-/*   Updated: 2022/01/28 16:49:36 by 0xNino           ###   ########.fr       */
+/*   Updated: 2022/02/01 19:48:53 by 0xNino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,11 @@
 # include <unistd.h>
 # include "../libft/libft.h"
 
-typedef struct s_pipex {
-	int		argc;
-	char	**argv;
-	char	**envp;
-	int		status;
-}	t_pipex;
-
-int	pipex(int argc, char **argv, char **envp);
+int		pipex(int argc, char **argv, char **envp);
+void	child_process(char **argv, char **envp, int *fd);
+void	parent_process(char **argv, char **envp, int *fd);
+void	error(char *error);
+void	execute(char *argv, char **envp);
+void	get_path(char *cmd, char **envp);
 
 #endif
