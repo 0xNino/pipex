@@ -6,7 +6,7 @@
 /*   By: 0xNino <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:07:12 by 0xNino            #+#    #+#             */
-/*   Updated: 2022/02/01 23:20:02 by 0xNino           ###   ########.fr       */
+/*   Updated: 2022/02/01 23:52:01 by 0xNino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	parent_process(char **argv, char **envp, int *fd)
 {
 	int	file_out;
 
-	file_out = open(argv[4], O_CREAT, O_WRONLY, O_TRUNC, 0777);
+	file_out = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, 0777);
 	if (file_out == -1)
 		error("Error\nOpen file_out error\n");
 	dup2(fd[0], STDIN_FILENO);
