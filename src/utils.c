@@ -6,16 +6,41 @@
 /*   By: 0xNino <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 18:22:39 by 0xNino            #+#    #+#             */
-/*   Updated: 2022/02/02 00:33:17 by 0xNino           ###   ########.fr       */
+/*   Updated: 2022/02/08 18:25:22 by 0xNino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	error(char *error)
+void	init_view(int argc, char **argv, char **envp, t_view *pipex)
+{
+	pipex->argc = argc;
+	pipex->argv = argv;
+	pipex->envp = envp;
+	pipex->cmd_count = argc - 3;
+	open_files(pipex);
+}
+
+void	open_files(t_view *pipex)
+{
+	pipex->infile = open(pipex->argv[1], O_RDONLY, 0777);
+	if (pipex->infile == -1)
+		error("Error\nOpen infile error\n", 1);
+	pipex->outfile = open(pipex->argv[4], O_CREAT | O_WRONLY | O_TRUNC, 0777);
+	if (pipex->outfile == -1)
+		error("Error\nOpen outfile error\n", 1);
+}
+
+void	close_files(t_view *pipex)
+{
+	close(pipex->infile);
+	close(pipex->outfile);
+}
+
+void	error(char *error, int code)
 {
 	ft_putstr_fd(error, STDERR_FILENO);
-	exit(EXIT_FAILURE);
+	exit(code);
 }
 
 void	execute(char *argv, char **envp)
@@ -24,7 +49,7 @@ void	execute(char *argv, char **envp)
 
 	cmd = ft_split(argv, ' ');
 	if (execve(get_path(cmd[0], envp), cmd, envp) == -1)
-		error("Error\nCommand not found\n");
+		error("Error\nCommand not found\n", 127);
 }
 
 char	*get_path(char *cmd, char **envp)
