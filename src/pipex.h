@@ -6,7 +6,7 @@
 /*   By: 0xNino <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 13:48:20 by 0xNino            #+#    #+#             */
-/*   Updated: 2022/02/08 18:56:36 by 0xNino           ###   ########.fr       */
+/*   Updated: 2022/02/09 15:54:21 by 0xNino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <errno.h>
 # include "../libft/libft.h"
 
 typedef struct s_view {

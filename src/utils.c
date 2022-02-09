@@ -6,7 +6,7 @@
 /*   By: 0xNino <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 18:22:39 by 0xNino            #+#    #+#             */
-/*   Updated: 2022/02/08 18:25:22 by 0xNino           ###   ########.fr       */
+/*   Updated: 2022/02/09 15:57:57 by 0xNino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,13 @@ void	close_files(t_view *pipex)
 	close(pipex->outfile);
 }
 
-void	error(char *error, int code)
+void	error(char *error, int errnum)
 {
-	ft_putstr_fd(error, STDERR_FILENO);
-	exit(code);
+	if (error)
+		ft_putstr_fd(error, STDERR_FILENO);
+	else
+		ft_putstr_fd(strerror(errnum), STDERR_FILENO);
+	exit(errnum);
 }
 
 void	execute(char *argv, char **envp)
