@@ -6,7 +6,7 @@
 /*   By: 0xNino <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 18:22:39 by 0xNino            #+#    #+#             */
-/*   Updated: 2022/02/09 17:14:06 by 0xNino           ###   ########.fr       */
+/*   Updated: 2022/02/09 23:32:28 by 0xNino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	execute(char *argv, char **envp)
 
 	cmd = ft_split(argv, ' ');
 	if (execve(get_path(cmd[0], envp), cmd, envp) == -1)
-		error(ft_strjoin(cmd[0], " : command not found\n"), errno);
+		error(ft_strjoin(cmd[0], " : command not found\n"), 127);
 }
 
 char	*get_path(char *cmd, char **envp)
