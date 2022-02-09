@@ -6,16 +6,19 @@
 /*   By: 0xNino <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 18:22:39 by 0xNino            #+#    #+#             */
-/*   Updated: 2022/02/02 00:33:17 by 0xNino           ###   ########.fr       */
+/*   Updated: 2022/02/09 17:14:06 by 0xNino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	error(char *error)
+void	error(char *error, int errnum)
 {
-	ft_putstr_fd(error, STDERR_FILENO);
-	exit(EXIT_FAILURE);
+	if (error)
+		ft_putstr_fd(error, STDERR_FILENO);
+	else
+		ft_putstr_fd(strerror(errnum), STDERR_FILENO);
+	exit(errnum);
 }
 
 void	execute(char *argv, char **envp)
@@ -24,7 +27,7 @@ void	execute(char *argv, char **envp)
 
 	cmd = ft_split(argv, ' ');
 	if (execve(get_path(cmd[0], envp), cmd, envp) == -1)
-		error("Error\nCommand not found\n");
+		error(ft_strjoin(cmd[0], " : command not found\n"), errno);
 }
 
 char	*get_path(char *cmd, char **envp)

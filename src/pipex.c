@@ -6,7 +6,7 @@
 /*   By: 0xNino <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:07:12 by 0xNino            #+#    #+#             */
-/*   Updated: 2022/02/01 23:52:01 by 0xNino           ###   ########.fr       */
+/*   Updated: 2022/02/09 16:11:12 by 0xNino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	pipex(int argc, char **argv, char **envp)
 	if (argc == 5)
 	{
 		if (pipe(fd) == -1)
-			error("Error\nPipe error\n");
+			error("Error\nPipe error\n", errno);
 		pid1 = fork();
 		if (pid1 < 0)
-			error("Error\nFork error\n");
+			error("Error\nFork error\n", errno);
 		if (pid1 == 0)
 			child_process(argv, envp, fd);
 		waitpid(pid1, NULL, 0);
@@ -32,9 +32,9 @@ int	pipex(int argc, char **argv, char **envp)
 		close(fd[1]);
 	}
 	else if (argc > 5)
-		error("Error\nToo many arguments\n");
+		error("Error\nToo many arguments\n", 1);
 	else if (argc < 5)
-		error("Error\nToo few arguments\n");
+		error("Error\nToo few arguments\n", 1);
 	return (0);
 }
 
@@ -44,7 +44,7 @@ void	child_process(char **argv, char **envp, int *fd)
 
 	file_in = open(argv[1], O_RDONLY, 0777);
 	if (file_in == -1)
-		error("Error\nOpen file_in error\n");
+		error(NULL, errno);
 	dup2(fd[1], STDOUT_FILENO);
 	dup2(file_in, STDIN_FILENO);
 	close(fd[0]);
@@ -57,7 +57,7 @@ void	parent_process(char **argv, char **envp, int *fd)
 
 	file_out = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, 0777);
 	if (file_out == -1)
-		error("Error\nOpen file_out error\n");
+		error(NULL, errno);
 	dup2(fd[0], STDIN_FILENO);
 	dup2(file_out, STDOUT_FILENO);
 	close (fd[1]);
