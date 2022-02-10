@@ -6,7 +6,7 @@
 /*   By: 0xNino <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 13:48:20 by 0xNino            #+#    #+#             */
-/*   Updated: 2022/02/09 16:04:27 by 0xNino           ###   ########.fr       */
+/*   Updated: 2022/02/10 09:41:16 by 0xNino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <unistd.h>
 # include <errno.h>
 # include "../libft/libft.h"
+
+# define URANDOM "/dev/urandom"
 
 int		pipex(int argc, char **argv, char **envp);
 void	child_process(char **argv, char **envp, int *fd);

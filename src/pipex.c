@@ -6,7 +6,7 @@
 /*   By: 0xNino <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:07:12 by 0xNino            #+#    #+#             */
-/*   Updated: 2022/02/09 16:11:12 by 0xNino           ###   ########.fr       */
+/*   Updated: 2022/02/10 10:37:04 by 0xNino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,26 @@ int	pipex(int argc, char **argv, char **envp)
 
 void	child_process(char **argv, char **envp, int *fd)
 {
-	int	file_in;
+	int	infile;
 
-	file_in = open(argv[1], O_RDONLY, 0777);
-	if (file_in == -1)
+	infile = open(argv[1], O_RDONLY, 0777);
+	if (infile == -1)
 		error(NULL, errno);
 	dup2(fd[1], STDOUT_FILENO);
-	dup2(file_in, STDIN_FILENO);
+	dup2(infile, STDIN_FILENO);
 	close(fd[0]);
 	execute(argv[2], envp);
 }
 
 void	parent_process(char **argv, char **envp, int *fd)
 {
-	int	file_out;
+	int	outfile;
 
-	file_out = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, 0777);
-	if (file_out == -1)
+	outfile = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, 0777);
+	if (outfile == -1)
 		error(NULL, errno);
 	dup2(fd[0], STDIN_FILENO);
-	dup2(file_out, STDOUT_FILENO);
+	dup2(outfile, STDOUT_FILENO);
 	close (fd[1]);
 	execute(argv[3], envp);
 }
